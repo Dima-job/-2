@@ -7,7 +7,6 @@ function getUserBirthday() {
 	return { day: parseInt(day), month: parseInt(month), year: parseInt(year) }
 }
 
-// Определение дня недели
 function getWeekday(day, month, year) {
 	let date = new Date(year, month - 1, day)
 	let weekdays = [
@@ -22,18 +21,15 @@ function getWeekday(day, month, year) {
 	return weekdays[date.getDay()]
 }
 
-// Определение високосного года
 function isLeapYear(year) {
 	return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
 }
 
-// Рассчет возраста пользователя
 function getUserAge(year) {
 	let currentYear = new Date().getFullYear()
 	return currentYear - year
 }
 
-// Форматированное отображение даты звёздочками
 function formatDateStars(day, month, year) {
 	const starNumbers = {
 		0: '***\n* *\n* *\n* *\n***',
@@ -61,14 +57,23 @@ function formatDateStars(day, month, year) {
 	return result
 }
 
-// Основная функция
 function main() {
 	let { day, month, year } = getUserBirthday()
-	console.log('День недели:', getWeekday(day, month, year))
-	console.log('Високосный год:', isLeapYear(year) ? 'Да' : 'Нет')
-	console.log('Возраст:', getUserAge(year), 'лет')
+	let output = document.getElementById('output')
+
+	// Вывод на страницу
+	output.innerHTML = `
+		<p><b>День недели:</b> ${getWeekday(day, month, year)}</p>
+		<p><b>Високосный год:</b> ${isLeapYear(year) ? 'Да' : 'Нет'}</p>
+		<p><b>Возраст:</b> ${getUserAge(year)} лет</p>
+		<p><b>Дата в формате звёздочек:</b> в консоли</p>
+	`
+
+	// Вывод звёздочек в консоль
 	console.log('Дата в формате звёздочек:')
 	console.log(formatDateStars(day, month, year))
 }
 
 main()
+
+
